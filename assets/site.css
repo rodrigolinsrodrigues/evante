@@ -1960,6 +1960,10 @@
        SELETOR DE IDIOMA (PT · EN · ES)
        ========================================================== */
     .nav-lang { order: -1; display: flex; justify-content: center; padding: 4px 0 8px; }
+    .lang-menu { position: relative; }
+    .lang-toggle { display: none; }
+
+    /* Dentro do menu ☰ (celular e tablet) as opções ficam visíveis ao abrir o menu */
     .lang-switch {
       display: inline-flex;
       align-items: center;
@@ -1969,17 +1973,14 @@
       border-radius: var(--radius-full);
     }
     .site-nav .lang-switch a {
-      min-width: 56px;
       min-height: 40px;
       justify-content: center;
-      padding: 0 12px;
+      padding: 0 14px;
       border-radius: var(--radius-full);
-      font-family: var(--font-heading);
-      font-size: 0.8125rem;
+      font-size: 0.875rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0;
       color: #0D4F8A;
-      transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
     }
     .site-nav .lang-switch a:hover { color: #0A2E52; background-color: rgba(255, 255, 255, 0.6); }
     .site-nav .lang-switch a[aria-current="page"],
@@ -1988,9 +1989,60 @@
       background-color: #FFFFFF;
       box-shadow: 0 1px 3px rgba(10, 46, 82, 0.22);
     }
+
+    /* Computador: botão de três tracinhos abre a lista de idiomas */
     @media (min-width: 1024px) {
       .nav-lang { order: 0; margin-left: 8px; padding: 0; }
-      .site-nav .lang-switch a { min-width: 38px; min-height: 32px; padding: 0 8px; font-size: 0.75rem; }
+      .js .lang-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 0;
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: var(--color-heading);
+        cursor: pointer;
+        transition: background-color 150ms ease;
+      }
+      .js .lang-toggle:hover,
+      .js .lang-menu.is-open .lang-toggle { background-color: var(--color-primary-light); }
+      .js .lang-switch {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        z-index: 20;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        min-width: 168px;
+        padding: 6px;
+        background-color: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+      }
+      .js .lang-menu.is-open .lang-switch { display: flex; }
+      .js .site-nav .lang-switch a {
+        justify-content: flex-start;
+        min-height: 44px;
+        padding: 0 14px;
+        border-radius: var(--radius-sm);
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: var(--color-heading);
+      }
+      .js .site-nav .lang-switch a:hover { background-color: var(--color-primary-light); }
+      .js .site-nav .lang-switch a[aria-current="page"],
+      .js .site-nav .lang-switch a[aria-current="page"]:hover {
+        color: #1175BE;
+        font-weight: 800;
+        background-color: var(--color-primary-light);
+        box-shadow: none;
+      }
     }
 
     /* Com o seletor de idioma, o menu completo só cabe a partir de 1024px:
@@ -2022,6 +2074,5 @@
       .site-nav ul { flex-wrap: nowrap; gap: 2px; }
       .site-nav a { padding: 10px var(--space-2); font-size: 0.875rem; }
       .site-nav .nav-cta { padding: 10px var(--space-3); }
-      .site-nav .lang-switch a { min-width: 32px; padding: 0 5px; }
-      .nav-lang { margin-left: 4px; }
+      .nav-lang { margin-left: 2px; }
     }

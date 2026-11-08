@@ -327,6 +327,29 @@
         });
       }
 
+      /* ---------- Seletor de idioma: botão de três tracinhos ---------- */
+      var langMenu = document.querySelector('.lang-menu');
+      var langToggle = document.querySelector('.lang-toggle');
+      if (langMenu && langToggle) {
+        var setLangOpen = function (open) {
+          langMenu.classList.toggle('is-open', open);
+          langToggle.setAttribute('aria-expanded', String(open));
+        };
+        langToggle.addEventListener('click', function (event) {
+          event.stopPropagation();
+          setLangOpen(!langMenu.classList.contains('is-open'));
+        });
+        document.addEventListener('click', function (event) {
+          if (!langMenu.contains(event.target)) setLangOpen(false);
+        });
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape' && langMenu.classList.contains('is-open')) {
+            setLangOpen(false);
+            langToggle.focus();
+          }
+        });
+      }
+
       /* ---------- Seletor de idioma: mantém a seção que está sendo lida ---------- */
       Array.prototype.slice.call(document.querySelectorAll('.lang-switch a')).forEach(function (link) {
         link.addEventListener('click', function () {
