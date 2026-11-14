@@ -1189,7 +1189,7 @@
     .js .students-track { width: max-content; }
 
     .student-card {
-      flex: 0 0 190px;
+      flex: 0 0 200px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1214,12 +1214,17 @@
       object-fit: cover; /* quando o card tem foto real (img.student-photo) */
     }
 
+    /* Nome e ícone sempre na mesma linha, para todos os cards ficarem alinhados;
+       nome longo demais é cortado com reticências em vez de quebrar a linha */
     .student-name {
       font-family: var(--font-heading);
-      font-size: 1rem;
+      font-size: 0.9375rem;
       font-weight: 600;
       color: var(--color-heading);
-      max-width: none;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Nível de ensino do estudante (Doutorando/Mestrando/IC), estilo chip */
